@@ -1,5 +1,8 @@
 package edu.towson.cis.cosc442.project3.vendingmachine;
 
+import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachine;
+import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException;
+import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineItem;
 
 /**
  * 
@@ -98,15 +101,18 @@ public class VendingMachine {
 	 * 1. If you add an item to a slot that is already occupied. 
 	 * 2. If you add an item with an invalid code
 	 */
-	public void addItem(VendingMachineItem item, String code)
+	public boolean addItem(VendingMachineItem item, String code)
 			throws VendingMachineException {
 		int slotIndex = getSlotIndex(code);
+		boolean canAdd = false;
 		if (itemArray[slotIndex] != null) {
 			throw new VendingMachineException(SLOT_MESSAGE + code
 					+ ALREADY_OCCUPIED_MESSAGE);
 		} else {
 			itemArray[slotIndex] = item;
+			canAdd=true;
 		}
+		return canAdd;
 	}
 
 	/**
