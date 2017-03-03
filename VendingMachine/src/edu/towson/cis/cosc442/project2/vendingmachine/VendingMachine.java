@@ -1,8 +1,5 @@
-package edu.towson.cis.cosc442.project3.vendingmachine;
+package edu.towson.cis.cosc442.project2.vendingmachine;
 
-import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachine;
-import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException;
-import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineItem;
 
 /**
  * 

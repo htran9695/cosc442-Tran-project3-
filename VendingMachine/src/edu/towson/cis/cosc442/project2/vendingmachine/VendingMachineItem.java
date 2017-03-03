@@ -1,6 +1,4 @@
-package edu.towson.cis.cosc442.project3.vendingmachine;
-
-import edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException;
+package edu.towson.cis.cosc442.project2.vendingmachine;
 
 /**
  * Class for items in the vending machine
