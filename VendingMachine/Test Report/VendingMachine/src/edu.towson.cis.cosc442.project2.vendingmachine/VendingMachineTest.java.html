@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>VendingMachineTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">VendingMachineTest (Mar 3, 2017 9:50:46 AM)</a> &gt; <a href="../../index.html" class="el_group">VendingMachine</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.towson.cis.cosc442.project2.vendingmachine</a> &gt; <span class="el_source">VendingMachineTest.java</span></div><h1>VendingMachineTest.java</h1><pre class="source lang-java linenums">package edu.towson.cis.cosc442.project2.vendingmachine;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+<span class="fc" id="L9">public class VendingMachineTest {</span>
+	VendingMachineItem item;
+	VendingMachine theMachine;
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L14">		item = new VendingMachineItem(&quot;Candy&quot;,2);</span>
+<span class="fc" id="L15">		theMachine= new VendingMachine();</span>
+<span class="fc" id="L16">	}</span>
+
+	@After
+	public void tearDown() throws Exception {
+<span class="fc" id="L20">	}</span>
+
+	@Test
+	/*Test with correct values adding in*/
+	public void testAddItemCorrectA() {
+<span class="fc" id="L25">		assertTrue(theMachine.addItem(item, &quot;A&quot;));</span>
+<span class="fc" id="L26">	}</span>
+	
+	@Test
+	/*Test with correct values adding in*/
+	public void testAddItemCorrectB() {
+<span class="fc" id="L31">		assertTrue(theMachine.addItem(item, &quot;B&quot;));</span>
+<span class="fc" id="L32">	}</span>
+	
+	@Test
+	/*Test with correct values adding in*/
+	public void testAddItemCorrectC() {
+<span class="fc" id="L37">		assertTrue(theMachine.addItem(item, &quot;C&quot;));</span>
+<span class="fc" id="L38">	}</span>
+	
+	@Test
+	/*Test with correct values adding in*/
+	public void testAddItemCorrectD() {
+<span class="fc" id="L43">		assertTrue(theMachine.addItem(item, &quot;D&quot;));</span>
+<span class="fc" id="L44">	}</span>
+	
+	@Test (expected = VendingMachineException.class)
+	/*Test with incorrect values adding in*/
+	public void testAddItemCorrectE() {
+<span class="nc" id="L49">		theMachine.addItem(item, &quot;E&quot;);</span>
+<span class="nc" id="L50">	}</span>
+	
+	@Test (expected = VendingMachineException.class)
+	/*Test with incorrect values adding in*/
+	public void testAddItemFalse() {
+<span class="fc" id="L55">		theMachine.addItem(item, &quot;A&quot;);</span>
+<span class="nc" id="L56">		theMachine.addItem(item, &quot;A&quot;);</span>
+<span class="nc" id="L57">		}</span>
+
+	@Test
+	/*Test with actual item to remove */
+	public void testRemoveItem() {
+<span class="fc" id="L62">		theMachine.addItem(item, &quot;A&quot;);</span>
+<span class="fc" id="L63">		theMachine.removeItem(&quot;A&quot;);</span>
+<span class="fc" id="L64">		assertNull(theMachine.getItem(&quot;A&quot;));</span>
+<span class="fc" id="L65">	}</span>
+
+	@Test (expected = VendingMachineException.class)
+	/*Test without item to remove */
+	public void testRemoveItemNone(){
+<span class="nc" id="L70">		theMachine.removeItem(&quot;A&quot;);</span>
+<span class="nc" id="L71">	}</span>
+	
+	@Test (expected = VendingMachineException.class)
+	/*Test with invalid amount to remove */
+	public void testInsertMoneyNone() {
+<span class="nc" id="L76">		theMachine.insertMoney(-200);</span>
+<span class="nc" id="L77">	}</span>
+	
+	@Test 
+	public void testInsertMoney() {
+<span class="fc" id="L81">		theMachine.insertMoney(200);</span>
+<span class="fc" id="L82">		assertEquals(theMachine.getBalance(),200,0.00001);</span>
+<span class="fc" id="L83">	}</span>
+
+	@Test
+	public void testGetBalance() {
+<span class="fc" id="L87">		assertEquals(theMachine.getBalance(),0,0.0000001);</span>
+<span class="fc" id="L88">	}</span>
+
+	@Test
+	public void testMakePurchaseSuccess() {
+<span class="fc" id="L92">		theMachine.insertMoney(200);</span>
+<span class="fc" id="L93">		theMachine.addItem(item,&quot;A&quot;);</span>
+<span class="fc" id="L94">		assertTrue(theMachine.makePurchase(&quot;A&quot;));</span>
+<span class="fc" id="L95">	}</span>
+	
+	@Test
+	public void testMakePurchaseFail1() {
+<span class="fc" id="L99">		theMachine.insertMoney(1);</span>
+<span class="fc" id="L100">		theMachine.addItem(item,&quot;A&quot;);</span>
+<span class="fc" id="L101">		assertFalse(theMachine.makePurchase(&quot;A&quot;));</span>
+<span class="fc" id="L102">	}</span>
+	
+	@Test
+	public void testMakePurchaseFail2() {
+<span class="fc" id="L106">		theMachine.insertMoney(1);</span>
+<span class="fc" id="L107">		assertFalse(theMachine.makePurchase(&quot;A&quot;));</span>
+<span class="fc" id="L108">	}</span>
+
+	@Test
+	public void testReturnChange1() {
+<span class="fc" id="L112">		theMachine.insertMoney(200);</span>
+<span class="fc" id="L113">		theMachine.addItem(item,&quot;A&quot;);</span>
+<span class="fc" id="L114">		theMachine.makePurchase(&quot;A&quot;);</span>
+<span class="fc" id="L115">		assertEquals(198, theMachine.returnChange(),0.0001);</span>
+		
+<span class="fc" id="L117">	}</span>
+	
+	@Test
+	public void testReturnChange2() {
+<span class="fc" id="L121">		theMachine.insertMoney(200);</span>
+<span class="fc" id="L122">		theMachine.addItem(item,&quot;A&quot;);</span>
+<span class="fc" id="L123">		theMachine.makePurchase(&quot;A&quot;);</span>
+<span class="fc" id="L124">		theMachine.returnChange();</span>
+<span class="fc" id="L125">		assertEquals(0, theMachine.getBalance(),0.0001);</span>
+		
+<span class="fc" id="L127">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>VendingMachineTest (Mar 3, 2017 9:50:46 AM)</div></body></html>
